@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Game</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <script defer src="scripts/app.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz Game</title>
+  <link rel="stylesheet" href="styles/main.css" />
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+  <script defer src="scripts/app.js"></script>
 </head>
 <body>
-    <div class="quiz-container">
+  <div class="quiz-container">
     <h1>Quiz Game</h1>
     <h2 id="qq"></h2>
-    <img src="" alt="" id="im">
-    <audio id="quizAudio" src="" preload="auto"></audio>
-    <button onclick="">Play Sound</button>
-    <button onclick="">A</button>
-    <button onclick="">B</button>
-    <button onclick="">C</button>
-    <button onclick="">D</button>
-    <input type="text" , id="text">
+    <img src="" alt="" id="im" class="hidden" />
+    <audio id="quizAudio" class="hidden" controls preload="auto"></audio>
 
-    <button onclick="">Previous</button>
-    <button onclick="">Next</button>
-    </div>
-</div>
+    <button id="a">A</button>
+    <button id="b">B</button>
+    <button id="c">C</button>
+    <button id="d">D</button>
+
+    <input type="text" id="text" class="hidden" />
+
+    <button id="pre">Previous</button>
+    <button id="next">Next</button>
+  </div>
 </body>
 </html>

@@ -61,18 +61,26 @@ let timer=setInterval(()=>{
     nextQustion()}
 },1000)
 
-function nextQustion(){
 
+function nextQustion(){
+  getTimer()
     checkAnswer()
-if (index < questions.length - 1) {
-    time=0
+if (index < questions.length - 1) { 
+ 
     index++
     display()
   }
+}
+function render(){
+  time=0
+}
+function getTimer(){
 
+  timerElm.textContent=time
+  render()
 
 }
-// nextQustion()
+
 
 function display() {
   const q = questions[index]

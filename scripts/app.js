@@ -49,6 +49,7 @@ const dOp = document.getElementById('d')
 const textElm = document.getElementById('text')
 const timerElm=document.getElementById('timer')
 const scoreElm=document.getElementById('score')
+const submitBtn=document.getElementById('submit')
 
 let index = 0
 let point=0
@@ -128,8 +129,14 @@ function checkAnswer(userAns) {
     nextQuestion()
   }, 5000)
 }
-
-display()
+function nextQuestion(){
+  if(index<questions.length-1){
+    index++
+    display()
+  }else{
+    endQuiz()
+  }
+}
 
 
 
@@ -137,6 +144,9 @@ aOp.addEventListener('click', () => checkAnswer(aOp.textContent))
 bOp.addEventListener('click', () => checkAnswer(bOp.textContent))
 cOp.addEventListener('click', () => checkAnswer(cOp.textContent))
 dOp.addEventListener('click', () => checkAnswer(dOp.textContent))
+
+
+
 
 
 

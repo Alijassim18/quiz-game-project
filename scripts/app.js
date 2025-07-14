@@ -48,37 +48,29 @@ const cOp = document.getElementById('c')
 const dOp = document.getElementById('d')
 const textElm = document.getElementById('text')
 const timerElm=document.getElementById('timer')
+const scoreElm=document.getElementById('score')
 
 let index = 0
 let point=0
 let time = 0
+let timer
 let userAnswer = ""
-let timer=setInterval(()=>{
-  console.log(time)
-  time+=1;
-  if(time==3){
-    userAnswer= ""
-    nextQustion()}
-},1000)
-
-
-function nextQustion(){
-  getTimer()
-    checkAnswer()
-if (index < questions.length - 1) { 
- 
-    index++
-    display()
-  }
-}
-function render(){
+function startTimer(){
+  clearInterval(timer)
   time=0
+  timerElm.textContent='Time:0'
+  timer=setInterval(()=>{
+    time++ 
+    timer.textContent=`Time:${time}`
+  },1000)
 }
-function getTimer(){
 
-  timerElm.textContent=time
-  render()
+function stopTimer(){
+  clearInterval(timer)
+}
 
+function updateScore() {
+  scoreElm.textContent = `Score: ${point} / ${questions.length}`
 }
 
 
@@ -123,6 +115,7 @@ function checkAnswer(){
   const correct=questions[index].answer.trim().toLowerCase()
   const user = userAnswer.trim().toLowerCase()
 if (user === correct) {
+  alert('correct answer')
     point++
   } else {
     if(point >0){

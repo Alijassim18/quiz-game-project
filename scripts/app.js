@@ -51,6 +51,8 @@ const preOp = document.getElementById('pre')
 const textElm = document.getElementById('text')
 const submitBtn = document.getElementById('submit')
 let index = 0
+let point=0
+let timer
 
 function display() {
   const q = questions[index]
@@ -84,6 +86,7 @@ function display() {
   } else if (q.type === 'Text') {
     textElm.value = ''
     textElm.classList.remove('hidden')
+    submitBtn.classList.remove('hidden')
   }
 }
 
@@ -105,17 +108,31 @@ function checkAnswer(userAnswer){
   const correct=questions[index].answer.trim().toLowerCase()
   const user = userAnswer.trim().toLowerCase()
 
-  if(user=== correct){
-        alert(' Correct!')
+
+if (user === correct) {
+    point++
   } else {
-    alert(' Incorrect. Try again.')
+    if(point >0){
+      point--
+    }
+  
   }
-  }
+}
 
 
-
-
-
-
-
+aOp.addEventListener('click', () => checkAnswer(aOp.textContent))
+bOp.addEventListener('click', () => checkAnswer(bOp.textContent))
+cOp.addEventListener('click', () => checkAnswer(cOp.textContent))
+dOp.addEventListener('click', () => checkAnswer(dOp.textContent))
+submitBtn.addEventListener('click', () => checkAnswer(textElm.value))
 display()
+
+
+
+
+
+
+
+
+
+

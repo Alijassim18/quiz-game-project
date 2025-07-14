@@ -76,25 +76,24 @@ function updateScore() {
 
 function display() {
   const q = questions[index]
+  userAnswer = ''
   quElem.textContent = q.question
-
   imgElm.classList.add('hidden')
   audioElm.classList.add('hidden')
   textElm.classList.add('hidden')
+  submitBtn.classList.add('hidden')
   aOp.classList.add('hidden')
   bOp.classList.add('hidden')
   cOp.classList.add('hidden')
   dOp.classList.add('hidden')
-
+  if (q.image) {
+    imgElm.src = q.image
+    imgElm.classList.remove('hidden')
+  } else if (q.audio) {
+    audioElm.src = q.audio
+    audioElm.classList.remove('hidden')
+  }
   if (q.type === 'MHQ') {
-    if (q.image !== '' && q.audio === '') {
-      imgElm.src = q.image
-      imgElm.classList.remove('hidden')
-    } else if (q.audio !== '' && q.image === '') {
-      audioElm.src = q.audio
-      audioElm.classList.remove('hidden')
-    }
-
     aOp.textContent = q.options[0]
     bOp.textContent = q.options[1]
     cOp.textContent = q.options[2]
@@ -108,23 +107,28 @@ function display() {
     textElm.classList.remove('hidden')
     submitBtn.classList.remove('hidden')
   }
+
+  startTimer()
 }
 
+function checkAnswer(userAns) {
+  stopTimer()
+  const correct = questions[index].answer.trim().toLowerCase()
+  const user = userAns.trim().toLowerCase()
 
-function checkAnswer(){
-  const correct=questions[index].answer.trim().toLowerCase()
-  const user = userAnswer.trim().toLowerCase()
-if (user === correct) {
-  alert('correct answer')
+  if (user === correct) {
     point++
+    alert(' Correct!')
   } else {
-    if(point >0){
-      point--
-    }
-  
+    alert(`Wrong! Correct: ${questions[index].answer}`)
   }
-  
+
+  updateScore()
+  setTimeout(() => {
+    nextQuestion()
+  }, 5000)
 }
+
 display()
 
 

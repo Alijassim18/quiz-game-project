@@ -46,13 +46,33 @@ const aOp = document.getElementById('a')
 const bOp = document.getElementById('b')
 const cOp = document.getElementById('c')
 const dOp = document.getElementById('d')
-const nextOp = document.getElementById('next')
-const preOp = document.getElementById('pre')
 const textElm = document.getElementById('text')
-const submitBtn = document.getElementById('submit')
+const timerElm=document.getElementById('timer')
+
 let index = 0
 let point=0
-let timer
+let time = 0
+let userAnswer = ""
+let timer=setInterval(()=>{
+  console.log(time)
+  time+=1;
+  if(time==3){
+    userAnswer= ""
+    nextQustion()}
+},1000)
+
+function nextQustion(){
+
+    checkAnswer()
+if (index < questions.length - 1) {
+    time=0
+    index++
+    display()
+  }
+
+
+}
+// nextQustion()
 
 function display() {
   const q = questions[index]
@@ -90,25 +110,10 @@ function display() {
   }
 }
 
-nextOp.addEventListener('click', () => {
-  if (index < questions.length - 1) {
-    index++
-    display()
-  }
-})
 
-preOp.addEventListener('click', () => {
-  if (index > 0) {
-    index--
-    display()
-  }
-})
-
-function checkAnswer(userAnswer){
+function checkAnswer(){
   const correct=questions[index].answer.trim().toLowerCase()
   const user = userAnswer.trim().toLowerCase()
-
-
 if (user === correct) {
     point++
   } else {
@@ -117,15 +122,18 @@ if (user === correct) {
     }
   
   }
+  
 }
+display()
+
 
 
 aOp.addEventListener('click', () => checkAnswer(aOp.textContent))
 bOp.addEventListener('click', () => checkAnswer(bOp.textContent))
 cOp.addEventListener('click', () => checkAnswer(cOp.textContent))
 dOp.addEventListener('click', () => checkAnswer(dOp.textContent))
-submitBtn.addEventListener('click', () => checkAnswer(textElm.value))
-display()
+
+
 
 
 

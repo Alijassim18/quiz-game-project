@@ -49,7 +49,7 @@ const dOp = document.getElementById('d')
 const nextOp = document.getElementById('next')
 const preOp = document.getElementById('pre')
 const textElm = document.getElementById('text')
-
+const submitBtn = document.getElementById('submit')
 let index = 0
 
 function display() {
@@ -100,5 +100,22 @@ preOp.addEventListener('click', () => {
     display()
   }
 })
+
+function checkAnswer(userAnswer){
+  const correct=questions[index].answer.trim().toLowerCase()
+  const user = userAnswer.trim().toLowerCase()
+
+  if(user=== correct){
+        alert(' Correct!')
+  } else {
+    alert(' Incorrect. Try again.')
+  }
+  }
+
+
+
+
+
+
 
 display()

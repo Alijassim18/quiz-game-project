@@ -67,7 +67,7 @@ function startTimer() {
     timerElm.textContent = `Time: ${remaining}`
     if (remaining === 0) {
       clearInterval(timer)
-      messageElm.textContent = "Time's up"
+      messageElm.textContent = "Time is finished"
       checkAnswer("")
     }
   }, 1000)
@@ -141,7 +141,7 @@ function checkAnswer(userAns) {
   updateScore()
   setTimeout(() => {
     nextQuestion()
-  }, 1000)
+  }, 3000)
 }
 
 function nextQuestion() {

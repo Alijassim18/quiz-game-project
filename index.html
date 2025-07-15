@@ -5,11 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Quiz Game</title>
   <link rel="stylesheet" href="styles/main.css" />
-  <style>
-    .hidden {
-      display: none;
-    }
-  </style>
   <script defer src="scripts/app.js"></script>
 </head>
 <body>
@@ -20,15 +15,14 @@
     <h2 id="qq"></h2>
     <img src="" alt="" id="im" class="hidden" />
     <audio id="quizAudio" class="hidden" controls preload="auto"></audio>
-
     <button id="a">A</button>
     <button id="b">B</button>
     <button id="c">C</button>
     <button id="d">D</button>
-
     <input type="text" id="text" class="hidden" />
-
+    <div id="message" class="message"></div>
       <button id="submit" class="hidden">submit</button>
+      <button id="restart" class="hidden">restart</button>
   </div>
 </body>
 </html>

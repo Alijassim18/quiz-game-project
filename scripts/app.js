@@ -47,26 +47,33 @@ const bOp = document.getElementById('b')
 const cOp = document.getElementById('c')
 const dOp = document.getElementById('d')
 const textElm = document.getElementById('text')
-const timerElm=document.getElementById('timer')
-const scoreElm=document.getElementById('score')
-const submitBtn=document.getElementById('submit')
+const timerElm = document.getElementById('timer')
+const scoreElm = document.getElementById('score')
+const messageElm = document.getElementById('message')
+const submitBtn = document.getElementById('submit')
+const restartBtn = document.getElementById('restart')
 
 let index = 0
-let point=0
-let time = 0
+let point = 0
 let timer
-let userAnswer = ""
-function startTimer(){
+let answered = false
+
+function startTimer() {
   clearInterval(timer)
-  time=0
-  timerElm.textContent='Time:0'
-  timer=setInterval(()=>{
-    time++ 
-    timer.textContent=`Time:${time}`
-  },1000)
+  let remaining = 10
+  timerElm.textContent = `Time: ${remaining}`
+  timer = setInterval(() => {
+    remaining--
+    timerElm.textContent = `Time: ${remaining}`
+    if (remaining === 0) {
+      clearInterval(timer)
+      messageElm.textContent = "Time's up"
+      checkAnswer("")
+    }
+  }, 1000)
 }
 
-function stopTimer(){
+function stopTimer() {
   clearInterval(timer)
 }
 
@@ -74,10 +81,10 @@ function updateScore() {
   scoreElm.textContent = `Score: ${point} / ${questions.length}`
 }
 
-
 function display() {
+  answered = false
   const q = questions[index]
-  userAnswer = ''
+  messageElm.textContent = ""
   quElem.textContent = q.question
   imgElm.classList.add('hidden')
   audioElm.classList.add('hidden')
@@ -87,6 +94,8 @@ function display() {
   bOp.classList.add('hidden')
   cOp.classList.add('hidden')
   dOp.classList.add('hidden')
+  restartBtn.classList.add('hidden')
+
   if (q.image) {
     imgElm.src = q.image
     imgElm.classList.remove('hidden')
@@ -94,6 +103,7 @@ function display() {
     audioElm.src = q.audio
     audioElm.classList.remove('hidden')
   }
+
   if (q.type === 'MHQ') {
     aOp.textContent = q.options[0]
     bOp.textContent = q.options[1]
@@ -113,49 +123,60 @@ function display() {
 }
 
 function checkAnswer(userAns) {
+  if (answered) return
+  answered = true
   stopTimer()
+
   const correct = questions[index].answer.trim().toLowerCase()
   const user = userAns.trim().toLowerCase()
 
   if (user === correct) {
     point++
-    alert(' Correct!')
+    messageElm.textContent = 'Correct'
   } else {
-    alert(`Wrong! Correct: ${questions[index].answer}`)
+    messageElm.textContent = `Wrong. Correct: ${questions[index].answer}`
+    if (point > 0) point--
   }
 
   updateScore()
   setTimeout(() => {
     nextQuestion()
-  }, 5000)
+  }, 1000)
 }
-function nextQuestion(){
-  if(index<questions.length-1){
+
+function nextQuestion() {
+  if (index < questions.length - 1) {
     index++
     display()
-  }else{
+  } else {
     endQuiz()
   }
 }
 
+function endQuiz() {
+  stopTimer()
+  messageElm.textContent = `Quiz completed. Final Score: ${point} / ${questions.length}`
+  restartBtn.classList.remove('hidden')
+}
 
+function restartQuiz() {
+  index = 0
+  point = 0
+  updateScore()
+  messageElm.textContent = ''
+  restartBtn.classList.add('hidden')
+  display()
+}
 
 aOp.addEventListener('click', () => checkAnswer(aOp.textContent))
 bOp.addEventListener('click', () => checkAnswer(bOp.textContent))
 cOp.addEventListener('click', () => checkAnswer(cOp.textContent))
 dOp.addEventListener('click', () => checkAnswer(dOp.textContent))
+submitBtn.addEventListener('click', () => {
+  const userAnswer = textElm.value
+  checkAnswer(userAnswer)
+})
+restartBtn.addEventListener('click', restartQuiz)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+display()
+updateScore()

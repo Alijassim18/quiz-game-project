@@ -24,17 +24,19 @@ const questions = [
     options: ['Rooster', 'Donkey', 'Monkey', 'Cow']
   },
   {
-    question: `What will be the output of the following code snippet?\n\nvar a = Math.max() < Math.min();\nvar b = Math.max() > Math.min();\nprint(a);\nprint(b);`,
+    question: `What will be the output of the following code snippet?\n\nlet a = Math.max() < Math.min();\nlet b = Math.max() > Math.min();\nprint(a);\nprint(b);`,
     type: 'Text',
     answer: 'true false',
     audio: '',
     image: ''
   },
   {
-    question: `Fill the blank. \nfunction _____(name,time){\n  return 'Good'+' '+time+','+' '+name+'!'\n}\nconsole.____('Exercise 5 Result:', greetUser("Sam", "morning"));`,
+    question: `Fill the blank.\n
+              function _____(name,time){\n return 'Good'+' '+time+','+' '+name+'!'\n}\n
+              console.____('Exercise 5 Result:', greetUser("Sam", "morning"));`,
     type: 'Text',
     answer: 'greetUser,log',
-    audio: '',
+     audio: '',
     image: ''
   }
 ]
@@ -60,7 +62,10 @@ let answered = false
 
 function startTimer() {
   clearInterval(timer)
+      
   let remaining = 10
+  if(questions[index].type=== 'Text')
+      remaining=20
   timerElm.textContent = `Time: ${remaining}`
   timer = setInterval(() => {
     remaining--
@@ -134,7 +139,7 @@ function checkAnswer(userAns) {
     point++
     messageElm.textContent = 'Correct'
   } else {
-    messageElm.textContent = `Wrong. Correct: ${questions[index].answer}`
+    messageElm.textContent = `Wrong Answer`
     if (point > 0) point--
   }
 

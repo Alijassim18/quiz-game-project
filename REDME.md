@@ -29,7 +29,7 @@
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
- Quiz game is game to test thinking speed, the user will get 1 mark when answer the question before finish the timer.
+ The Quiz Game tests your thinking speed. You must answer each question before the timer ends to earn 1 point. If the answer is wrong or time runs out, you lose a point. There’s a 3-second pause between questions, and the correct answer is always shown. The game ends with your final score and an option to restart.
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

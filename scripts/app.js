@@ -85,21 +85,22 @@ let answered = false
 function startTimer() {
   clearInterval(timer)
       
-  let remaining = 10
-  if(questions[index].type=== 'Text')
-      remaining=20
+  let remaining =3 
+  if (questions[index].type === 'Text')
+    remaining = 5
+
   timerElm.textContent = `Time: ${remaining}`
   timer = setInterval(() => {
     remaining--
     timerElm.textContent = `Time: ${remaining}`
     if (remaining === 0) {
       clearInterval(timer)
-      messageElm.textContent = "Time is finished"
-      checkAnswer("")
+      if (!answered) {
+        checkAnswer("")
+      }
     }
   }, 1000)
 }
-
 function stopTimer() {
   clearInterval(timer)
 }
@@ -148,7 +149,6 @@ function display() {
 
   startTimer()
 }
-
 function checkAnswer(userAns) {
   if (answered) return
   answered = true
@@ -161,7 +161,11 @@ function checkAnswer(userAns) {
     point++
     messageElm.textContent = 'Correct'
   } else {
-    messageElm.textContent = `Wrong Answer`
+    if (user === "") {
+      messageElm.textContent = 'Time is Finish'
+    } else {
+      messageElm.textContent = 'Wrong Answer'
+    }
     if (point > 0) point--
   }
 

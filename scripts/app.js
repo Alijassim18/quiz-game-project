@@ -85,9 +85,9 @@ let answered = false
 function startTimer() {
   clearInterval(timer)
       
-  let remaining =3 
+  let remaining =10
   if (questions[index].type === 'Text')
-    remaining = 5
+    remaining = 20
 
   timerElm.textContent = `Time: ${remaining}`
   timer = setInterval(() => {

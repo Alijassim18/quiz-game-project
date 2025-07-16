@@ -49,7 +49,7 @@ const questions = [
     options: [ 'England', 'USA', 'Bahrain','Switzerland']
   },
     {
-    question: 'What is the counrty that makes sushi?',
+    question: 'What is the country that makes sushi?',
     type: 'Text',
     answer: 'Japan',
      audio: '',
@@ -184,6 +184,7 @@ function endQuiz() {
   stopTimer()
   messageElm.textContent = `Quiz completed. Final Score: ${point} / ${questions.length}`
   restartBtn.classList.remove('hidden')
+  submitBtn.classList.add('hidden')
 }
 
 function restartQuiz() {

@@ -1,3 +1,4 @@
+function init(){
 const questions = [
   {
     question: 'Who is this?',
@@ -211,3 +212,5 @@ startBtn.addEventListener('click', () => {
   display()                            
   updateScore()                      
 });
+}
+document.addEventListener('DOMContentLoaded',init)

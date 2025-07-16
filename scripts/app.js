@@ -38,7 +38,23 @@ const questions = [
     answer: 'greetUser,log',
      audio: '',
     image: ''
+  },
+  {
+    question: 'Guess the flag?',
+    type: 'MHQ',
+    answer: 'Switzerland',
+    audio: '',
+    image: 'assets/download.jpeg',
+    options: [ 'England', 'USA', 'Bahrain','Switzerland']
+  },
+    {
+    question: 'What is the counrty that makes sushi?',
+    type: 'Text',
+    answer: 'Japan',
+     audio: '',
+    image: 'assets/sushi.jpg'
   }
+
 ]
 
 const quElem = document.getElementById('qq')
@@ -54,11 +70,16 @@ const scoreElm = document.getElementById('score')
 const messageElm = document.getElementById('message')
 const submitBtn = document.getElementById('submit')
 const restartBtn = document.getElementById('restart')
+ const quiz = document.getElementById("quiz")
+const startBtn = document.getElementById("startBtn")
+const welcomeScreen = document.getElementById("welcome-screen")
 
 let index = 0
 let point = 0
 let timer
 let answered = false
+
+
 
 function startTimer() {
   clearInterval(timer)
@@ -170,7 +191,8 @@ function restartQuiz() {
   updateScore()
   messageElm.textContent = ''
   restartBtn.classList.add('hidden')
-  display()
+  quiz.classList.add('hidden')
+  welcomeScreen.classList.remove('hidden')
 }
 
 aOp.addEventListener('click', () => checkAnswer(aOp.textContent))
@@ -183,5 +205,9 @@ submitBtn.addEventListener('click', () => {
 })
 restartBtn.addEventListener('click', restartQuiz)
 
-display()
-updateScore()
+startBtn.addEventListener('click', () => {
+  welcomeScreen.classList.add('hidden') 
+  quiz.classList.remove('hidden')        
+  display()                            
+  updateScore()                      
+});
